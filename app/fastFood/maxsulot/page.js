@@ -1,7 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Categories from './Category';
+import Maxdulot from './Maxsulot';
 
-export default function page() {
+const AdminPanel = () => {
+  const [categories, setCategories] = React.useState([]);
+
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <h2>Kategoriyalar</h2>
+      <Categories categories={categories} setCategories={setCategories} />
+      <h2>Mahsulotlar</h2>
+      <Maxdulot categories={categories} />
+    </div>
+  );
+};
+
+export default AdminPanel;

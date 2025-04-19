@@ -1,7 +1,13 @@
-import React from 'react'
+import React from 'react';
+import Orders from './Orders';
 
-export default function page() {
+const Savdo = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <h2>Zakazlar</h2>
+      <Orders />
+    </div>
+  );
+};
+
+export default Savdo;

@@ -1,0 +1,132 @@
+.formContainer {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .button:hover {
+    background-color: #218838;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .listItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .deleteButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .deleteButton:hover {
+    background-color: #c82333;
+  }
+  .deleteButton_edit {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .deleteButton_edit:hover {
+    background-color: #2196F3;
+  }
+
+
+  /* Modal styles */
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.7); /* Fonni qorong'i qilish */
+}
+
+.ReactModal__Content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #ffffff; /* Oq fon */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Soyali effekt */
+  width: 400px;
+  max-width: 90%; /* Mobil qurilmalar uchun moslashuvchan */
+  border: 1px solid #ccc; /* Chegarani belgilash */
+}
+
+.modalTitle {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  color: #333; /* Qora rang */
+  text-align: center; /* Markazda joylashuvi */
+}
+
+.modalInput {
+  margin: 10px 0;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* Yumshoq burchaklar */
+}
+
+.modalButton {
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #4CAF50; /* Yashil rang */
+  color: white;
+  font-weight: bold;
+}
+
+.modalButton:hover {
+  background-color: #45a049; /* Hover effekti */
+}
+
+.closeButton {
+  margin-top: 10px;
+  background-color: #f44336; /* Qizil rang */
+}
+
+.closeButton:hover {
+  background-color: #d32f2f; /* Hover effekti */
+}

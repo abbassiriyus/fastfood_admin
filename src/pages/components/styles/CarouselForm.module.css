@@ -1,0 +1,52 @@
+/* styles/CarouselForm.module.css */
+.carouselContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.carouselList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.carouselItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.carouselImage {
+    width: 100px;
+    height: auto;
+}
+
+.button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+ .deleteButton {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.editButton{
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;  
+}

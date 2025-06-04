@@ -1,0 +1,96 @@
+
+
+.loginContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #e7f1ff, #a3c1e0); /* Oq ko'k gradient */
+    animation: fade 10s infinite alternate;
+}
+
+
+
+@keyframes fade {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.loginContainer__time {
+    font-size: 48px;
+    color: #007bff; /* Ko'k rang */
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.7);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.loginForm {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    z-index: 1;
+    
+}
+
+.loginForm__title {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.loginForm__group {
+    margin-bottom: 15px;
+}
+
+.loginForm__label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.loginForm__input {
+    width: 92%;
+    padding: 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.loginForm__input:focus {
+    border-color: #0056b3; /* To'yingan ko'k rang */
+    outline: none;
+}
+
+.loginForm__button {
+    width: 92%;
+    padding: 10px;
+    background-color: #007bff; /* Ko'k rang */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.loginForm__button:hover {
+    background-color: #0056b3; /* To'yingan ko'k rang */
+}
+
+.loginMessage {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.loginMessage__link {
+    color: #007bff; /* Ko'k rang */
+    text-decoration: none;
+}
+
+.loginMessage__link:hover {
+    text-decoration: underline;
+}

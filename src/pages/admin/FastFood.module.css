@@ -1,0 +1,259 @@
+/* pages/admin/FastFood.module.css */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.buttonGroup {
+    margin-bottom: 16px;
+}
+
+.buttonGroup button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    background-color: #007BFF; /* Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.buttonGroup button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.addButton {
+    margin-bottom: 16px;
+    padding: 10px 15px;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.addButton:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.editButton {
+    background-color: #ffc107; /* Yellow */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.editButton:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+.deleteButton {
+    background-color: #dc3545; /* Red */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.deleteButton:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalForm {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modalForm label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modalForm input,
+.modalForm select,
+.modalForm textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.passwordInput {
+    display: flex;
+    align-items: center;
+}
+
+.passwordInput input {
+    flex: 1;
+    margin-right: 5px;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+}
+
+.checkboxContainer input {
+    display: none; /* Hide default checkbox */
+}
+
+.checkboxCustom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007BFF; /* Blue */
+    border-radius: 4px;
+    margin-right: 8px;
+    transition: background-color 0.3s;
+}
+
+.checkboxContainer input:checked + .checkboxCustom {
+    background-color: #007BFF; /* Blue */
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submitButton {
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.submitButton:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.cancelButton {
+    background-color: #dc3545; /* Red */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cancelButton:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalForm, .deleteModalContent {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 400px; /* Modalning kengligi */
+}
+
+.modal h2 {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.modal label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal input, .modal select, .modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submitButton, .cancelButton {
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+    background-color: #005bb5;
+}
+
+.cancelButton {
+    background-color: #ccc; /* Cancel tugmasi uchun rang */
+}
+
+.cancelButton:hover {
+    background-color: #aaa;
+}
+
+.deleteModalContent {
+    text-align: center;
+}
+
+.deleteModalContent h2 {
+    margin-bottom: 20px;
+}

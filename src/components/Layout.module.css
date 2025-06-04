@@ -1,0 +1,46 @@
+/* components/Layout.module.css */
+.layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav button {
+    background: none;
+    color: white;
+    border: none;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.nav button:hover {
+    text-decoration: underline;
+}
+.logo{
+    font-weight: 900;
+    cursor: pointer;
+}
+.logo span{
+    color: gold;
+}
+.content {
+    flex: 1;
+    padding: 20px;
+    background: #f0f0f0;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}

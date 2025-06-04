@@ -1,0 +1,220 @@
+.ofitsant {
+    /* padding: 20px; */
+    font-family: Arial, sans-serif;
+}
+
+
+.ofitsant__tab {
+    margin-right: 10px;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+    transition: background 0.3s;
+    padding: 2px;
+}
+
+.ofitsant__tab:hover {
+scale: 1.1;
+border-bottom: 1px solid;
+
+}
+
+.ofitsant__tabActive {
+    background: #242222;
+border-bottom: 1px solid;
+
+}
+
+.ofitsant__accordion {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+margin-bottom: 20px;
+
+}
+
+.ofitsant__accordionItem {
+    border-bottom: 1px solid #ddd;
+}
+
+.ofitsant__accordionHeader {
+    padding: 10px;
+    background: #f7f7f7;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ofitsant__accordionHeader:hover {
+    background: #e2e2e2;
+}
+
+.ofitsant__accordionTitle {
+    font-weight: bold;
+}
+
+.ofitsant__accordionContent {
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: auto;
+}
+
+.ofitsant__accordionContent table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ofitsant__accordionContent th, .ofitsant__accordionContent td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.ofitsant__accordionContent th {
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.ofitsant__accordionContent tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.ofitsant__accordionContent tr:hover {
+    background-color: #e2e2e2;
+}
+
+.ofitsant__modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-radius: 8px;
+    width: 90%; /* Kichik ekranlar uchun moslashtirish */
+    max-width: 400px;
+}
+
+.ofitsant__modalTitle {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.ofitsant__modalText {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.ofitsant__modalActions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ofitsant__button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.ofitsant__button:hover {
+    background: #218838;
+}
+
+.ofitsant__buttonCancel {
+    padding: 10px 15px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.ofitsant__buttonCancel:hover {
+    background: #c82333;
+}
+
+.ofitsant__table {
+    width: 90%;
+    margin: auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ofitsant__table th, .ofitsant__table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.ofitsant__table th {
+    background: #007bff;
+    color: white;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+ 
+
+
+    .ofitsant__modal {
+        width: 95%; /* Modal kengligi kichik ekranlar uchun */
+    }
+
+    .ofitsant__accordionContent table {
+        font-size: 0.9em; /* Kichik ekranlarda jadval matni o'lchami */
+    }
+}
+
+@media (max-width: 480px) {
+    .ofitsant__modalTitle {
+        font-size: 1.2em; /* Modal sarlavhasi kichik ekranlar uchun */
+    }
+
+    .ofitsant__modalText {
+        font-size: 1em; /* Modal matni kichik ekranlar uchun */
+    }
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #333;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .link {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+
+  

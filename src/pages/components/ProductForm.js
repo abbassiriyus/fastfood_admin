@@ -15,35 +15,37 @@ const [category, setCategory] = useState('');
 const [file, setFile] = useState(null);
 const [categories, setCategories] = useState([]);
 const [isModalOpen, setIsModalOpen] = useState(false);
+const [selectedCategory, setSelectedCategory] = useState('');
+const [orders, setOrders] = useState('');
+
 const handleSubmit = (e) => {
-e.preventDefault(); // Formni yuborishni to'xtatish
+  e.preventDefault();
+  const formData = new FormData();
+  formData.append('name', productName);
+  formData.append('price', price);
+  formData.append('description', description);
+  formData.append('category_id', category);
+  formData.append('image', file);
+  formData.append('orders', orders);
 
-const formData = new FormData();
-formData.append('name', productName);
-formData.append('price', price);
-formData.append('description', description);
-formData.append('category_id', category);
-formData.append('image', file);
-if(file){
-axios.post(`${url}/products`, formData).then(res => {
-  getData(); // Yangi mahsulot qo'shilgandan so'ng ma'lumotlarni yangilash
-  // Form ma'lumotlarini tozalash
-  setProductName('');
-  setPrice('');
-  setDescription('');
-  setCategory('');
-  setFile(null);
-  document.querySelector('#file_2').files[0]=null
-  document.querySelector('#file_2').value=""
-
-}).catch(err => {
-  console.error(err);
-});
-}else{
-  alert("rasmni qayta tanlang")
-}
-
+  if (file) {
+    axios.post(`${url}/products`, formData).then(res => {
+      getData();
+      setProductName('');
+      setPrice('');
+      setDescription('');
+      setCategory('');
+      setOrders('');
+      setFile(null);
+      document.querySelector('#file_2').value = "";
+    }).catch(err => {
+      console.error(err);
+    });
+  } else {
+    alert("Rasmni tanlang");
+  }
 };
+
 
 const getData = () => {
 axios.get(`${url}/products`).then(res => {
@@ -87,6 +89,18 @@ useEffect(() => {
 getData();
 }, []);
 
+
+useEffect(() => {
+  if (data?.id) {
+    setProductName(data.name);
+    setPrice(data.price);
+    setDescription(data.description);
+    setCategory(data.category_id);
+    setOrders(data.orders); // bu yerda qo‘shildi
+  }
+}, [data]);
+
+
 const handleEdit = (id) => {
 setIsModalOpen(true)
 setData(id)
@@ -109,6 +123,14 @@ placeholder="Narx"
 value={price}
 onChange={(e) => setPrice(e.target.value)}
 />
+<input
+  className={styles.input}
+  type="number"
+  placeholder="Tartib raqami (orders)"
+  value={orders}
+  onChange={(e) => setOrders(e.target.value)}
+/>
+
 <input
 className={styles.input}
 type="text"
@@ -136,21 +158,41 @@ onChange={(e) => setFile(e.target.files[0])}
 </label><br />
 <button className={styles.button} type="submit">Qo'shish</button>
 </form>
-<ul className={styles.list}>
-{products.map(product => (
-<li className={styles.listItem} key={product.id}>
-<div className={styles.productDetails}>
-<strong>{product.name}</strong> - {product.price} so'm
-<p>{product.description}</p>
-<p>Kategoriya: {product.category}</p>
-<img src={product.image} alt={product.name} className={styles.productImage} />
+<div className={styles.filterContainer}>
+  <label>Kategoriya bo‘yicha filter:</label>
+  <select
+    className={styles.input}
+    value={selectedCategory}
+    onChange={(e) => setSelectedCategory(e.target.value)}
+  >
+    <option value="">Barchasi</option>
+    {categories.map(cat => (
+      <option key={cat.id} value={cat.id}>{cat.name}</option>
+    ))}
+  </select>
 </div>
-<button className={styles.editButton}
-onClick={() => handleEdit(product)}>Tahrirlash</button>
-<button onClick={() => handleDelete(product.id)} className={styles.deleteButton}>O'chirish</button>
-</li>
+
+<div className={styles.productGrid}>
+{products
+  .filter(product => selectedCategory === '' || product.category_id === +selectedCategory)
+  .map(product => (
+    <div key={product.id} className={styles.productCard}>
+      <img src={product.image} alt={product.name} className={styles.cardImage} />
+      <h3>{product.name}</h3>
+      <p>{product.description}</p>
+      <p><strong>Narx:</strong> {product.price} so'm</p>
+      <p><strong>Kategoriya:</strong> {product.category}</p>
+      <p><strong>Tartib raqami:</strong> {product.orders}</p> {/* ✅ Qo‘shildi */}
+      <div className={styles.cardButtons}>
+        <button onClick={() => handleEdit(product)} className={styles.editButton}>✏️</button>
+        <button onClick={() => handleDelete(product.id)} className={styles.deleteButton}>🗑️</button>
+      </div>
+    </div>
 ))}
-</ul>
+
+
+</div>
+
 <ProductModal data={data} isOpen={isModalOpen} onClose={() =>{ setIsModalOpen(false),getData()}} />
 </div>
 );

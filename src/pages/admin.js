@@ -128,10 +128,7 @@ const AdminPage = () => {
         return Object.keys(getLast30Days()).map(date => fastfoodRevenue[fastfoodId]?.daily[date] || 0);
     });
 
-    const fastfoodMonthlyData = fastfoods.map(fastfood => {
-        const fastfoodId = fastfood.id;
-        return Object.keys(monthlyRevenue).map(month => fastfoodRevenue[fastfoodId]?.monthly[month] || 0);
-    });
+ 
 
     return (
         <div className={styles.adminContainer}>

@@ -6,7 +6,12 @@ import url from '../../host/host';
 const ProductModal = ({ isOpen, onClose, data }) => {
     const [categories1, setCategories1] = useState([]);
     const [typeFile1, setTypeFile1] = useState(false);
-
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [categoryId, setCategoryId] = useState('');
+    const [imageInput, setImageInput] = useState('');
+    const [orders, setOrders] = useState('');
     useEffect(() => {
         if (isOpen) {
             document.querySelector('#productModal').style.display = 'block';
@@ -14,34 +19,45 @@ const ProductModal = ({ isOpen, onClose, data }) => {
             document.querySelector('#productModal').style.display = 'none';
         }
     }, [isOpen]);
+   useEffect(() => {
+    if (data && isOpen) {
+        setName(data.name || '');
+        setDescription(data.description || '');
+        setPrice(data.price || '');
+        setCategoryId(data.category_id || '');
+        setImageInput(data.image || '');
+        setOrders(data.orders || ''); // <-- Qo‘shildi
+        setTypeFile1(false);
+    }
+}, [data, isOpen]);
 
-    const handleSubmit1 = (e) => {
-        e.preventDefault();
+ const handleSubmit1 = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('category_id', categoryId);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('orders', orders);
 
-        // FormData ob'ektini yaratamiz
-        const formData = new FormData();
-        formData.append('name', document.querySelector('#productName').value);
-        formData.append('category_id', document.querySelector('#categorySelect').value);
-        formData.append('description', document.querySelector('#description').value);
-        formData.append('price', document.querySelector('#price').value);
+    if (typeFile1) {
+        const file = document.querySelector('#fileInput').files[0];
+        formData.append('image', file);
+    } else {
+        formData.append('image', imageInput);
+    }
 
-        if (typeFile1) {
-            const fileInput = document.querySelector('#fileInput').files[0];
-            formData.append('image', fileInput);
-        } else {
-            formData.append('image', document.querySelector('#imageInput').value);
-        }
+    axios.put(`${url}/products/fastfood/${data.id}`, formData)
+        .then(res => {
+            alert("Mahsulot o'zgartirildi!");
+            onClose(); // Modalni yopish
+        })
+        .catch(err => {
+            alert("Xatolik yuz berdi: " + err.message);
+        });
+};
 
-        axios.put(`${url}/products/fastfood/${data.id}`, formData)
-            .then(res => {
-                alert("Mahsulot qo'shildi!");
-                getData1();
-                onClose();
-            })
-            .catch(err => {
-                alert('Xatolik yuz berdi. Ma\'lumotlarni tekshiring');
-            });
-    };
+
 
     const getData1 = () => {
         axios.get(`${url}/categories`).then(res1 => {
@@ -64,17 +80,18 @@ const ProductModal = ({ isOpen, onClose, data }) => {
                 <h2 className={styles.modal__title}>Mahsulot Ma'lumotlari</h2>
                 <form className={styles.modal__form} onSubmit={handleSubmit1}>
                     <input
-                        id="productName"
                         className={styles.modal__input}
-                        defaultValue={data && data.name}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         type="text"
                         placeholder="Mahsulot Nomi"
                         required
                     />
+
                     <select
-                        id="categorySelect"
-                        defaultValue={data && data.category_id}
                         className={styles.modal__input}
+                        value={categoryId}
+                        onChange={(e) => setCategoryId(e.target.value)}
                         required
                     >
                         <option value="">Tanlang</option>
@@ -82,36 +99,59 @@ const ProductModal = ({ isOpen, onClose, data }) => {
                             <option key={key} value={item.id}>{item.name}</option>
                         ))}
                     </select>
+
                     <div>
                         <input
-                            onChange={(e) => setTypeFile1(e.target.checked)}
                             type="checkbox"
-                            id="fileCheckbox"
+                            checked={typeFile1}
+                            onChange={(e) => setTypeFile1(e.target.checked)}
                         /> File
                     </div>
-                    <input
-                        id={typeFile1 ? "fileInput" : "imageInput"}
-                        className={styles.modal__input}
-                        defaultValue={data && data.image}
-                        type={typeFile1 ? "file" : "text"}
-                        placeholder="Rasm URL"
-                        required
-                    />
+
+                    {typeFile1 ? (
+                        <input
+                            id="fileInput"
+                            className={styles.modal__input}
+                            type="file"
+                            required
+                        />
+                    ) : (
+                        <input
+                            id="imageInput"
+                            className={styles.modal__input}
+                            value={imageInput}
+                            onChange={(e) => setImageInput(e.target.value)}
+                            type="text"
+                            placeholder="Rasm URL"
+                            required
+                        />
+                    )}
+
                     <textarea
-                        id="description"
-                        defaultValue={data && data.description}
                         className={styles.modal__textarea}
-                        placeholder="Ta'rif"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Taʼrif"
                         required
                     />
+<input
+    className={styles.modal__input}
+    value={orders}
+    onChange={(e) => setOrders(e.target.value)}
+    type="number"
+    placeholder="Tartib raqami (orders)"
+    required
+/>
+
                     <input
-                        id="price"
                         className={styles.modal__input}
-                        defaultValue={data && data.price}
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
                         type="number"
                         placeholder="Narxi"
                         required
                     />
+
                     <button className={styles.modal__button} type="submit">Saqlash</button>
                 </form>
             </div>

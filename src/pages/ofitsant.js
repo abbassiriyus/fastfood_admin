@@ -92,7 +92,12 @@ const handleConfirm = async () => {
     }
 };
 
- 
+ var [user1,setUser1]=useState({})
+useEffect(()=>{
+if(localStorage){
+setUser1(JSON.parse(localStorage.getItem('user')))
+}
+},[])
     useEffect(() => {
         socket.on('zakazUpdated', () => {
           getdata(); // Yangilangan buyurtmalarni olish
@@ -212,7 +217,7 @@ for (let i = 0; i < res1.data.length; i++) {
         </li>
       </ul>
     </nav>
-        
+        <h2 className={styles.ofitsant_name} >{user1.username || ""}</h2>
             {page === 0 && (
            // JSX qismida o'chirish tugmasini qo'shish
 <div className={styles.ofitsant__accordion}>

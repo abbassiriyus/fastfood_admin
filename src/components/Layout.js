@@ -17,6 +17,7 @@ const LayoutComponent = ({ children }) => {
                 <nav className={styles.nav}>
                     <button onClick={() => handleMenuClick('fastfood')}>Users</button>
                     <button onClick={() => handleMenuClick('dashboard')}>Daromat</button>
+                    <button onClick={() => handleMenuClick('zakaz')}>Zakazlar</button>
                     <button onClick={() => handleMenuClick('users')}>Offitsant</button>
                 </nav>
             </header>

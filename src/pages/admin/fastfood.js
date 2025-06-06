@@ -18,14 +18,16 @@ const FastFood = () => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
-        const response = await axios.get(`${url}/users`);
-        setData(response.data);
-    };
+   const fetchData = async () => {
+    const response = await axios.get(`${url}/users`);
+    const sortedData = response.data.sort((a, b) => (a.orders || 0) - (b.orders || 0));
+    setData(sortedData);
+};
 
     const handleAddEditUser = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
+    
 
         if (currentUser) {
             await axios.put(`${url}/users/${currentUser.id}`, formData);
@@ -73,16 +75,18 @@ const FastFood = () => {
                         <th>Username</th>
                         <th>Phone Number</th>
                         <th>Type</th>
+                        <th>order</th>
                         <th>Active</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody> 
+                <tbody>
                     {filteredData.map(user => (
                         <tr key={user.id}>
                             <td>{user.username}</td>
                             <td>{user.phone_number}</td>
                             <td>{user.type}</td>
+                            <td>{user.orders}</td>
                             <td>{user.is_active ? 'Yes' : 'No'}</td>
                             <td style={{ display: 'flex', gap: '10px' }}>
                                 <button onClick={() => handleOpenModal(user)} className={styles.editButton}>Edit</button>
@@ -105,17 +109,7 @@ const FastFood = () => {
                             Phone Number:
                             <input name="phone_number" defaultValue={currentUser?.phone_number || ''} required />
                         </label>
-                        <label>
-                            Password:
-                            <div className={styles.passwordInput}>
-                                <input type={passwordVisible ? 'text' : 'password'} name="password" required />
-                                {passwordVisible ? (
-                                    <AiOutlineEye onClick={() => setPasswordVisible(false)} />
-                                ) : (
-                                    <AiOutlineEyeInvisible onClick={() => setPasswordVisible(true)} />
-                                )}
-                            </div>
-                        </label>
+                    
                         <label>
                             Type:
                             <select name="type" defaultValue={currentUser?.type || ''} required>
@@ -123,6 +117,10 @@ const FastFood = () => {
                                 <option value="2">FastFood</option>
                                 <option value="3">Admin</option>
                             </select>
+                        </label>
+                        <label>
+                            Orders:
+                            <input type="number" name="orders" defaultValue={currentUser?.orders || ''} />
                         </label>
                         <label>
                             Description:

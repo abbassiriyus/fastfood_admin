@@ -1,147 +1,223 @@
-/* General Layout */
+/* Layout */
 .layout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  /* align-items: center; */
-  min-height: 100vh;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f7fc;
-}
-
-.table-container {
-  width: 100%;
-  /* max-width: 1200px; */
   padding: 20px;
-  margin: 20px auto;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #f3f4f6;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* Table container */
+.tableContainer {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tableContainer:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+}
+
+/* Table */
 .table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 14px;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .tableHeader {
-  background-color: #f8f8f8;
+  background: linear-gradient(90deg, #2563eb, #6366f1);
+  color: #fff;
 }
 
 .tableHeaderCell {
-  padding: 12px;
-  text-align: left;
-  font-weight: bold;
-  border: 1px solid #e1e1e1;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
-.tableRow {
-  border-bottom: 1px solid #f1f1f1;
+.tableRow:nth-child(even) {
+  background: #f9fafb;
+}
+
+.tableRow:hover {
+  background: #eef2ff;
+  transition: background 0.3s ease;
 }
 
 .tableCell {
-  padding: 12px;
-  border: 1px solid #e1e1e1;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
 }
 
+/* Action button in table */
 .tableCellButton {
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
+  padding: 6px 14px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  font-size: 13px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
 }
 
 .tableCellButton:hover {
-  background-color: #0056b3;
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(16,185,129,0.4);
 }
 
+/* Modal */
 .modalBackdrop {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background: rgba(0,0,0,0.55);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
+  z-index: 50;
+  backdrop-filter: blur(5px);
 }
 
 .modalContent {
-  background-color: white;
+  background: #fff;
   padding: 20px;
-  border-radius: 8px;
-  max-width: 900px;
-  width: 100%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  width: 95%;
+  max-width: 920px;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+  animation: fadeIn 0.35s ease;
 }
 
 .modalHeader {
   font-size: 18px;
-  margin-bottom: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 .modalCloseButton {
-  padding: 8px 16px;
-  background-color: #dc3545;
-  color: white;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  float: right;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
-  margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
 .modalCloseButton:hover {
-  background-color: #b02a37;
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(239,68,68,0.45);
 }
 
+/* Inputs */
 .inputContainer {
-  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 18px 0;
+  flex-wrap: wrap;
 }
 
 .inputContainer input {
-  padding: 8px;
-  margin: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 180px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   font-size: 14px;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
-.inputContainer button {
-  padding: 8px 16px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
+.inputContainer input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.25);
+  outline: none;
 }
 
-.inputContainer button:hover {
-  background-color: #218838;
-}
-
+/* Buttons */
 .button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  margin: 5px;
+  transition: all 0.3s ease;
   font-size: 14px;
-  transition: background-color 0.3s;
 }
 
 .button:hover {
-  background-color: #0056b3;
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(59,130,246,0.45);
+}
+
+/* Summary box */
+.summaryBox {
+  margin-top: 16px;
+  background: #f9fafb;
+  padding: 14px;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.summaryBox p {
+  margin: 4px 0;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* Animatsiya */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 18px 0;
+  flex-wrap: wrap;
+}
+
+.pageBtn {
+  padding: 5px 10px;
+  font-size: 13px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: #f0f7ff;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+}
+
+.pageBtn:disabled {
+  color: #aaa;
+  cursor: not-allowed;
+  background: #f9f9f9;
+}
+
+.activePage {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  border-color: #2563eb;
+  box-shadow: 0 3px 8px rgba(37,99,235,0.3);
 }

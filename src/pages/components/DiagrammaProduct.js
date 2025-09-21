@@ -76,9 +76,9 @@ const myfilter_f=()=>{
     };
 
     return (
-        <div className={styles.dashboard}>
-            <div className={styles['date-filter']}>
-            <h2 className={styles['date-filter__title']}>Sana Filtri</h2>
+        <div className={styles.dashboard}><h2 className={styles['date-filter__title']}>Sana Filtri</h2>
+            <div className={styles['dateFilter']}>
+            
             <label className={styles['date-filter__label']} htmlFor="start">Boshlash:</label>
             <input type="date" id="start" className={styles['date-filter__input']} />
             <label className={styles['date-filter__label']} htmlFor="end">Tugash:</label>

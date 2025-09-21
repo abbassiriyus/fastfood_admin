@@ -1,168 +1,224 @@
-/* Zakaz.module.css */
-
+/* === Container === */
 .container {
-  padding: 20px;
-  background-color: #f7f9fc;
-  border-radius: 10px;
+  padding: 24px;
+  background: linear-gradient(135deg, #ffffff, #f9fbff);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
+.container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* === Title === */
 .title {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 20px;
   text-align: center;
+  background: linear-gradient(90deg, #ff00cc, #3333ff, #00ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow 3s infinite alternate;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-.table th,
-.table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: left;
-}
-
-.table th {
-  background-color: #f1f1f1;
-  font-weight: bold;
-}
-
-.toggleBtn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.toggleBtn:hover {
-  background-color: #0056b3;
-}
-
-.accordionContent {
-  background-color: #fefefe;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.innerTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.innerTable th,
-.innerTable td {
-  border: 1px solid #ccc;
-  padding: 8px;
-}
-
-.innerTable th {
-  background-color: #e9ecef;
-}
-.filterBar {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.input {
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.select {
-  padding: 0.5rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
+/* === Filter Bar === */
 .filterBar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+  justify-content: center;
 }
 
 .input,
 .select {
-  padding: 8px 12px;
-  font-size: 16px;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #dce3f0;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  min-width: 180px;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
 }
 
 .input:focus,
 .select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: #00ccff;
   outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 204, 255, 0.25);
 }
 
-.pagination {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+/* === Table === */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
 }
 
-.pagination button {
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background-color: #fff;
+.table th,
+.table td {
+  border: 1px solid #eef2f7;
+  padding: 12px 14px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.table th {
+  background: #3333ff;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.table tr {
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.table tr:nth-child(even) {
+  background: #fafcff;
+}
+
+.table tr:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 200, 0.06), rgba(0, 200, 255, 0.06));
+  transform: scale(1.01);
+}
+
+/* === Toggle Button === */
+.toggleBtn {
+  padding: 7px 14px;
+  font-size: 13px;
+  border: none;
+  background: linear-gradient(135deg, #3333ff, #ff00cc);
+  color: #fff;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(51,51,255,0.25);
 }
 
-.pagination button:hover {
-  background-color: #f0f0f0;
+.toggleBtn:hover {
+  background: linear-gradient(135deg, #00ccff, #3333ff);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(0, 204, 255, 0.35);
 }
 
-.pagination button:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+/* === Accordion Content === */
+.accordionContent {
+  padding: 14px;
+  background: #fdfdff;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+  animation: fadeIn 0.4s ease;
 }
 
-.activePage {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
+/* === Inner Table === */
+.innerTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.innerTable th,
+.innerTable td {
+  border: 1px solid #eee;
+  padding: 8px 12px;
+  font-size: 13px;
+}
+
+.innerTable th {
+  background: #f5f9ff;
+  font-weight: 600;
+}
+
+/* === Total Boxes === */
+.innerTotalBox {
+  margin-top: 10px;
+  font-size: 13px;
+  padding: 10px;
+  background: linear-gradient(135deg, #ffffff, #f6faff);
+  border: 1px solid #e2ebf7;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .totalBox {
   margin-top: 20px;
   padding: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fafafa;
-  font-size: 16px;
+  background: linear-gradient(135deg, #f8fbff, #eef6ff);
+  border: 1px solid #dce9ff;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
 .totalBox p {
   margin: 6px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
 }
 
-
-.innerTotalBox {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #f3f3f3;
-  border-top: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
+/* === Pagination === */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 22px 0;
+  flex-wrap: wrap;
 }
 
-.innerTotalBox p {
-  margin: 4px 0;
+.pageBtn {
+  padding: 7px 14px;
+  font-size: 13px;
+  border: 1px solid #dce3f0;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: #f0f7ff;
+  border-color: #00ccff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 204, 255, 0.25);
+}
+
+.pageBtn:disabled {
+  color: #aaa;
+  cursor: not-allowed;
+  background: #f9f9f9;
+}
+
+.activePage {
+  background: linear-gradient(90deg, #ff00cc, #00ccff);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(255, 0, 200, 0.4);
+}
+
+/* === Animations === */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 6px #ff00cc;
+  }
+  to {
+    text-shadow: 0 0 14px #00ccff;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

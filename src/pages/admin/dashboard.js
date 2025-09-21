@@ -17,6 +17,10 @@ export default function Dashboard() {
   const [endDate, setEndDate] = useState('');
   const [prosent, setProsent] = useState(10); // Default 10%
 
+  // ✅ Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   useEffect(() => {
     const fetchType2Users = async () => {
       try {
@@ -56,22 +60,55 @@ export default function Dashboard() {
     }
 
     setZakazProducts(zakazProducts);
+    setCurrentPage(1); // modal ochilganda doim 1-sahifadan boshlansin
     setShowModal(true);
   };
 
-  const handleFilterByDate = () => {
-    if (!startDate || !endDate) {
-      alert("Iltimos, sanalarni kiriting!");
-      return;
-    }
+ const handleFilterByDate = async () => {
+  if (!startDate || !endDate) {
+    alert("Iltimos, sanalarni kiriting!");
+    return;
+  }
 
-    const filteredZakazProducts = zakazProducts.filter((product) => {
-      const zakazDate = new Date(product.created_at);
-      return zakazDate >= new Date(startDate) && zakazDate <= new Date(endDate);
+  try {
+    const [productRes, zakazProductsRes, procentRes] = await Promise.all([
+      axios.get(`${url}/products`),
+      axios.get(`${url}/zakaz_products`),
+      axios.get(`${url}/protsent`),
+    ]);
+
+    const productlar = productRes.data;
+    const procentValue = procentRes.data[0]?.foiz || 10;
+
+    const filteredZakaz = zakazProductsRes.data.filter((zp) => {
+      const date = new Date(zp.created_at);
+      return (
+        zp.fastfood_id == selectedUser &&
+        date >= new Date(startDate) &&
+        date <= new Date(endDate)
+      );
     });
 
-    setZakazProducts(filteredZakazProducts);
-  };
+    // Enrich with product name and foiz calculation
+    for (let i = 0; i < filteredZakaz.length; i++) {
+      const product = productlar.find(p => p.id === filteredZakaz[i].product_id);
+      if (product) {
+        filteredZakaz[i].name = product.name;
+      }
+      filteredZakaz[i].foizSum = (filteredZakaz[i].price * filteredZakaz[i].count * procentValue) / 100;
+      filteredZakaz[i].total = filteredZakaz[i].price * filteredZakaz[i].count;
+      filteredZakaz[i].totalWithFoiz = filteredZakaz[i].total + filteredZakaz[i].foizSum;
+    }
+
+    setProsent(procentValue);
+    setZakazProducts(filteredZakaz);
+    setCurrentPage(1);
+  } catch (error) {
+    console.error("Filtrlashda xatolik:", error);
+    alert("Xatolik yuz berdi. Qayta urinib ko‘ring.");
+  }
+};
+
 
   const calculateEarnings = async (userId) => {
     try {
@@ -100,6 +137,12 @@ export default function Dashboard() {
   const totalSum = zakazProducts.reduce((sum, item) => sum + item.total, 0);
   const totalFoiz = zakazProducts.reduce((sum, item) => sum + item.foizSum, 0);
   const totalWithFoiz = zakazProducts.reduce((sum, item) => sum + item.totalWithFoiz, 0);
+
+  // ✅ Pagination hisoblash
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = zakazProducts.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(zakazProducts.length / itemsPerPage);
 
   return (
     <LayoutComponent>
@@ -175,7 +218,7 @@ export default function Dashboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {zakazProducts.map((product, index) => (
+                  {currentItems.map((product, index) => (
                     <tr key={index} className={styles.tableRow}>
                       <td className={styles.tableCell}>{product.zakaz_id}</td>
                       <td className={styles.tableCell}>{product.product_id}</td>
@@ -189,6 +232,25 @@ export default function Dashboard() {
                   ))}
                 </tbody>
               </table>
+
+              {/* ✅ Pagination controls */}
+              <div className={styles.pagination}>
+                <button
+                  disabled={currentPage === 1}
+                      className={styles.button}
+                  onClick={() => setCurrentPage(prev => prev - 1)}
+                >
+                  ⬅️ Oldingi
+                </button>
+                <span>Sahifa {currentPage} / {totalPages}</span>
+                <button
+                className={styles.button}
+                  disabled={currentPage === totalPages}
+                  onClick={() => setCurrentPage(prev => prev + 1)}
+                >
+                  Keyingi ➡️
+                </button>
+              </div>
 
               <div className={styles.summaryBox}>
                 <p><strong>Jami narx:</strong> {totalSum.toLocaleString()} so'm</p>

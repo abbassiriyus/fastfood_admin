@@ -18,7 +18,7 @@ export default function Page() {
         axios.post(`${url}/users/login`, formData)
             .then((response) => {
                 if (response.status === 200) {
-                localStorage.setItem('token',response.data.token)
+                sessionStorage.setItem('token',response.data.token)
                 localStorage.setItem("user",JSON.stringify(response.data.user))
                 if(response.data.user.type==1){
                  window.location="/ofitsant"
